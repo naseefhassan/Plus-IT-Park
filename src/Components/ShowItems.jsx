@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
 
 function ShowItems() {
-  const [product, setProduct] = useState("");
+  const [product, setProduct] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,13 +18,17 @@ function ShowItems() {
 
   return (
     <>
-      <div>
-        {product.map((item, index) => {
+      <div className="flex flex-wrap gap-6 my-5 justify-around">
+        {product.map((item, index) => (
           <div
             key={index}
             className="max-w-xs rounded overflow-hidden shadow-lg"
           >
-            <img className="w-full" src={item.image} alt={item.title} />
+            <img
+              className="w-full h-[300px]"
+              src={item.image}
+              alt={item.title}
+            />
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2">{item.title}</div>
               <p className="text-gray-700 text-base">{item.description}</p>
@@ -36,8 +40,8 @@ function ShowItems() {
                 Rating: {item.rating.rate}/5 ({item.rating.count} reviews)
               </p>
             </div>
-          </div>;
-        })}
+          </div>
+        ))}
       </div>
     </>
   );
