@@ -4,26 +4,27 @@ import axiosInstance from "../api/axios";
 
 function AuthGuard() {
   const navigate = useNavigate();
-  const [Isprotected, setProtected] = useState(false);
+  const [isProtected, setIsProtected] = useState(false);
 
   useEffect(() => {
-    try {
-      const ProtectedRoute = async () => {
+    const fetchProtectedRoute = async () => {
+      try {
         const response = await axiosInstance.get("/api/protected");
         console.log(response);
         if (response.status === 200) {
-          setProtected(true);
-        } else {
-          navigate("/");
+          setIsProtected(true);
         }
-        console.log(response);
-      };
-      ProtectedRoute();
-    } catch (error) {
-      console.error(error);
-    }
+      } catch (error) {
+        if(error.response && error.response.status === 400){
+            navigate('/')
+        }
+        console.error(error);
+      }
+    };
+    fetchProtectedRoute();
   }, []);
-  return <>{Isprotected && <Outlet />}</>;
+
+  return <>{isProtected && <Outlet />}</>;
 }
 
 export default AuthGuard;

@@ -16,16 +16,23 @@ function Header() {
 
   return (
     <>
-      <div className="h-20  bg-gray-200 flex justify-around items-center">
+      <div className="h-20 w-full -my-24 fixed  bg-gray-200 flex justify-around items-center">
         <div className="text-3xl font-bold px-10">Plus IT</div>
         <div className="flex gap-5">
           <Link to={"/home"}>
-            <button>Home</button>
+            <button className="cursor-pointer hover:border-b-black hover:border-2 leading-5">
+              Home
+            </button>
           </Link>
           <Link to={"/profile"}>
-            <button className="">Update</button>
+            <button className="cursor-pointer hover:border-b-black hover:border-2 leading-5">
+              Update
+            </button>
           </Link>
-          <button onClick={Handledelete} className="">
+          <button
+            onClick={Handledelete}
+            className="cursor-pointer hover:border-b-black hover:border-2 leading-5"
+          >
             Delete
           </button>
         </div>
