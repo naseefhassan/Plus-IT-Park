@@ -2,13 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axiosInstance from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Header() {
   const navigate = useNavigate();
   const Handledelete = async () => {
     try {
       await axiosInstance.delete("/api/delete-user");
-      navigate("/");
+      toast.success("Successfully Account Deleted");
+      setTimeout(() => {
+        navigate("/");
+      }, 4000);
     } catch (error) {
       console.error(error);
     }
@@ -36,6 +41,7 @@ function Header() {
             Delete
           </button>
         </div>
+        <ToastContainer />
       </div>
     </>
   );

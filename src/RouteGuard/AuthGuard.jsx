@@ -10,7 +10,6 @@ function AuthGuard() {
     const fetchProtectedRoute = async () => {
       try {
         const response = await axiosInstance.get("/api/protected");
-        console.log(response);
         if (response.status === 200) {
           setIsProtected(true);
         }

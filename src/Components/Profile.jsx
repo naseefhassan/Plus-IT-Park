@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
-import Header from "./Header";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
+  const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axiosInstance.get("/api/users");
+        setUser(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -17,7 +34,11 @@ function Profile() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axiosInstance.put("/api/update-user");
+      await axiosInstance.put("/api/update-user");
+      toast.success("Profile Updated");
+      setTimeout(() => {
+        navigate("/home");
+      }, 3000);
     } catch (error) {
       console.error(error);
     }
@@ -25,7 +46,6 @@ function Profile() {
 
   return (
     <>
-      <Header />
       <div className="max-w-md mx-auto  p-6 bg-white rounded-md shadow-md">
         <h2 className="text-2xl font-semibold mb-4">Profile Update</h2>
         <form onSubmit={handleSubmit}>
@@ -40,6 +60,7 @@ function Profile() {
               type="text"
               id="name"
               value={name}
+              placeholder={user.name}
               onChange={handleNameChange}
               className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
@@ -56,6 +77,7 @@ function Profile() {
               id="password"
               value={password}
               onChange={handlePasswordChange}
+              placeholder={user.password}
               className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
@@ -66,6 +88,7 @@ function Profile() {
             Update Profile
           </button>
         </form>
+        <ToastContainer />
       </div>
     </>
   );
