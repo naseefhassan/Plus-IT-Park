@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axiosInstance from "../api/axios";
+import Header from "./Header";
 
 function Profile() {
   const [name, setName] = useState("");
@@ -27,6 +28,7 @@ function Profile() {
 
   return (
     <>
+      <Header />
       <div className="max-w-md mx-auto  p-6 bg-white rounded-md shadow-md">
         <h2 className="text-2xl font-semibold mb-4">Profile Update</h2>
         <form onSubmit={handleSubmit}>

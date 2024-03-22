@@ -1,13 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axiosInstance from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
   const Handledelete = async () => {
     try {
-      const response = await axiosInstance.delete("/api/delete-user");
-      console.log(response);
+      await axiosInstance.delete("/api/delete-user");
+      navigate("/");
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
   };
 
@@ -16,10 +19,13 @@ function Header() {
       <div className="h-20  bg-gray-200 flex justify-around items-center">
         <div className="text-3xl font-bold px-10">Plus IT</div>
         <div className="flex gap-5">
-          <Link to={"/profile"}>
-            <button className="bg-orange-900 p-2">Update</button>
+          <Link to={"/home"}>
+            <button>Home</button>
           </Link>
-          <button onClick={Handledelete} className="bg-orange-900 p-2">
+          <Link to={"/profile"}>
+            <button className="">Update</button>
+          </Link>
+          <button onClick={Handledelete} className="">
             Delete
           </button>
         </div>

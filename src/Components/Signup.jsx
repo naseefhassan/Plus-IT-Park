@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
   const [err, errmsg] = useState("");
   const [UserData, SetUserData] = useState({
     username: "",
@@ -36,7 +37,7 @@ function Signup() {
       });
       const token = response.data.token;
       localStorage.setItem("token", token);
-
+      navigate("/home");
     } catch (error) {
       console.error(error);
     }
