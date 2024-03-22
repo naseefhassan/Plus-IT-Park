@@ -18,12 +18,9 @@ function Profile() {
     event.preventDefault();
     try {
       const response = await axiosInstance.put("/api/update-user");
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
-    console.log("Name:", name);
-    console.log("Password:", password);
   };
 
   return (

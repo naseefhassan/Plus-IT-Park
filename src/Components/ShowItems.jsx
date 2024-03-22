@@ -7,7 +7,6 @@ function ShowItems() {
     const fetchData = async () => {
       try {
         const response = await axiosInstance.get("/api/items");
-        console.log(response.data);
         setProduct(response.data);
       } catch (error) {
         console.error(error);

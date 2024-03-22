@@ -25,7 +25,6 @@ function Signup() {
   const Submit = async (e) => {
     e.preventDefault();
     try {
-      console.log(UserData);
       const name = UserData.username;
       const email = UserData.email;
       const password = UserData.password;

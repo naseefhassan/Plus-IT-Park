@@ -21,7 +21,6 @@ function Login() {
   const Submit = async (e) => {
     e.preventDefault();
     try {
-      console.log(loginData);
       const email = loginData.email;
       const password = loginData.password;
 
