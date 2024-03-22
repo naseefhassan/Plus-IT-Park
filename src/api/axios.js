@@ -5,4 +5,15 @@ const Instance = axios.create({
 })
 
 
+Instance.interceptors.request.use((confiq)=>{
+    const token= localStorage.getItem('jwtToken')
+    if(token){
+        confiq.headers['x-access-token']=token
+    }
+    return confiq
+},(error)=>{
+    return Promise.reject(error)
+})
+
 export default Instance
+
