@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axiosInstance from "../api/axios";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [err, errmsg] = useState("");
@@ -35,6 +36,7 @@ function Signup() {
       });
       const token = response.data.token;
       localStorage.setItem("token", token);
+
     } catch (error) {
       console.error(error);
     }

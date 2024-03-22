@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import Header from "../Components/Header";
 import ShowItems from "../Components/ShowItems";
 
